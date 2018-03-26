@@ -6,7 +6,9 @@
   "scripts": {
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
-    "dev-server": "webpack-dev-server --mode development --open"
+    "dev-server": "webpack-dev-server --mode development --open",
+    "start": "node server/server.js",
+    "heroku-postbuild": "yarn run build:prod"
   },
   "author": "Tianyu",
   "license": "ISC",
