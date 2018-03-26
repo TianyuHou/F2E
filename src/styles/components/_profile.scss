@@ -1,0 +1,74 @@
+.profile {
+  display: flex;
+  width: 80%;
+  margin: 30px auto;
+  justify-content: space-around;
+}
+
+.profile-pic {
+  flex-basis: 20%;
+}
+
+.profile-content {
+  margin-left: 6%;
+  flex-basis: 80%;
+}
+
+.profile-content-dashboard {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  border-radius: 50%;
+  box-shadow: 5px 5px 10px;
+}
+
+.edit-icon {
+  display: flex;
+  font-family: $font-btn;
+  font-size: $font-size-large;
+  margin-top: 10px;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.edit-icon > a:hover {
+  cursor: pointer;
+}
+
+.profile-progressbar {
+  width: 80%;
+  margin: 20px auto 20px;
+}
+
+.table-profile-title {
+  display: grid;
+  width: 100%;
+  font-family: $font-title;
+  font-size: $font-size-large;
+  grid-template-columns: 250px auto;
+  grid-column-gap: 70px;
+}
+
+.table-profile > * {
+  @extend .table-profile-title;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $font-size-large;
+}
+
+.profile-btn {
+  margin: 0 0 0 auto;
+  font-family: $font-btn;
+  font-size: $font-size-large;
+  color: $off-white;
+  border: 1px solid $off-white;
+}
+
+.profile-btn:hover {
+  cursor: pointer;
+  background-color: $off-white;
+  color: $black;
+}

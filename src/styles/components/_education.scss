@@ -1,0 +1,136 @@
+.education-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.education {
+  width: 80%;
+  margin: 20px auto 20px;
+  flex: 1;
+}
+
+.education-frame {
+  display: flex;
+  margin: 20px auto;
+}
+
+.education-content {
+  flex-basis: 65%;
+  height: 100%;
+}
+
+.education-list {
+  margin-left: 30px;
+  flex: 1;
+}
+
+.video {
+  width: 100%;
+  height: 350px;
+}
+
+.mentor-profile {
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+  border-bottom: 1px solid $dark-blue;
+  box-shadow: 5px 5px 5px;
+}
+
+.mentor-intro > p {
+  text-align: right;
+  font-weight: bold;
+}
+
+.mentor-profile > img {
+  border-radius: 50%;
+  width: 40%;
+  height: 40%;
+  margin-left: 10px;
+}
+
+.lecture-container {
+  margin-top: 20px;
+}
+
+.table-lecture > a {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-header-pic {
+  display: flex;
+  align-items: center;
+}
+
+.comment-header-pic > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.comment-operation {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comment-operation > a {
+  margin-right: 10px;
+  font-family: $font-btn;
+  font-size: $font-size-large;
+}
+
+.reply {
+  width: 500px;
+  height: 100px;
+}
+
+.addcomment {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto;
+  padding: 10px;
+  border-bottom: 1px solid $grey;
+}
+
+.addcomment-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addcomment-profile > * {
+  margin: 5px;
+}
+
+.addcomment-profile > img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.add-comment-btn {
+  font-family: $font-btn;
+  font-size: $font-size-large;
+  color: $off-white;
+  background-color: $dark-blue;
+  border-radius: 15px;
+  width: 80px;
+  height: 30px;
+  border: none;
+  box-shadow: 4px 4px 10px $dark-grey;
+  transition: all 0.2s ease-in-out;
+}
+
+.add-comment-btn:hover {
+  cursor: pointer;
+  background-color: $blue;
+  box-shadow: 1px 1px 3px $dark-grey;
+}

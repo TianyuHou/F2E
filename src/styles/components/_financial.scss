@@ -1,0 +1,89 @@
+.financial-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.financial {
+  width: 80%;
+  margin: 20px auto 0;
+  flex: 1;
+}
+
+.table-financial > * {
+  @extend .table-title-financial;
+}
+
+.table-title-financial {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 20% 20% 40% 20%;
+}
+
+.searchbar {
+  display: flex;
+  width: 60%;
+  margin: 20px auto 20px;
+  flex: 1;
+}
+
+.searchbar > input {
+  flex: 1;
+  border: 0;
+  padding: 4px 0;
+  border-radius: 30px;
+  border: 1px solid $dark-blue;
+  background-color: transparent;
+  box-shadow: 2px 2px 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.searchbar > input:focus,
+.searchbar > input:active {
+  box-shadow: none;
+}
+
+.search-btn {
+  margin-left: 20px;
+  color: $off-white;
+  text-align: center;
+  font-family: $font-btn;
+  font-size: $font-size-large;
+  background-color: $dark-blue;
+  border-radius: 15px;
+  width: 60px;
+  box-shadow: 3px 3px 5px $black;
+}
+
+.search-btn:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 5px $black;
+}
+
+.request-form {
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 30% 30% 30% 10%;
+  align-items: center;
+  font-family: $font-subtitle;
+  font-size: $font-size-large;
+}
+
+.request-form input {
+  border-bottom: 1px solid;
+}
+
+.request-money-btn {
+  @extend .search-btn;
+  width: 100px;
+  margin: 0;
+  border-radius: 20px;
+  background-color: $dark-blue;
+  border: none;
+}
+
+.request-money-btn:hover {
+  cursor: pointer;
+  background-color: $red;
+  box-shadow: 1px 1px 5px $black;
+}

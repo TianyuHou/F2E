@@ -1,0 +1,18 @@
+.progress {
+  width: 100%;
+  background-color: $light-grey;
+  border-radius: 20px 20px 20px 20px;
+  font-family: $font-subtitle;
+  font-size: $font-size-large;
+}
+
+#progress-bar {
+  border-radius: 20px 20px 20px 20px;
+  width: 10%;
+  height: 30px;
+  background-color: #4caf50;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+  box-shadow: 3px 3px 10px $black;
+}
