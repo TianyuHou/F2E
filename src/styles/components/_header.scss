@@ -5,6 +5,7 @@
   background-color: $black;
   color: $off-white;
 }
+
 .header-container {
   display: flex;
   justify-content: flex-end;
@@ -26,11 +27,13 @@
   align-items: baseline;
   margin-bottom: 20px;
 }
+
 .header-logout > * {
   margin-left: 20px;
   text-align: right;
   color: $off-white;
 }
+
 .nav-bar {
   display: flex;
   width: 60%;

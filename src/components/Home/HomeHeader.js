@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { startLogin } from '../../actions/auth';
 
 const HomeHeader = ({ startLogin }) => {
@@ -8,6 +9,21 @@ const HomeHeader = ({ startLogin }) => {
       <button type="submit" onClick={startLogin} className="login-btn">
         Login
       </button>
+      <NavLink
+        to={`/home`}
+        className="home-language-text"
+        activeClassName="home-language-text-active"
+      >
+        English
+      </NavLink>
+      <div className="home-vertical-line" />
+      <NavLink
+        to={`/home2`}
+        className="home-language-text"
+        activeClassName="home-language-text-active"
+      >
+        Español
+      </NavLink>
     </div>
   );
 };

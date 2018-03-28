@@ -22,13 +22,13 @@ class JobboardItem extends Component {
         <div>
           <div className="avator">
             <img src="/images/u1.jpg" />
-            <h4>Amazon</h4>
+            <h4>{this.props.companyName}</h4>
           </div>
-          <h4>SDE</h4>
+          <h4>{this.props.position}</h4>
           <a>
             <i className="fas fa-paper-plane" />Apply
           </a>
-          <h4>15 Sep, 8:56Am</h4>
+          <h4>{this.props.date}</h4>
           <a className="delete-icon">
             <i className="fas fa-trash-alt" />Delete
           </a>
@@ -37,13 +37,7 @@ class JobboardItem extends Component {
           className="collapsible-content"
           isOpened={this.state.isopen}
         >
-          <h5>
-            Hi, This is Administrator from F2E, I'm here to inform you that you
-            need to submit your report. thank you! Hi, This is Administrator
-            from F2E, I'm here to inform you that you need to submit your
-            report. thank you! Hi, This is Administrator from F2E, I'm here to
-            inform you that you need to submit your report. thank you!
-          </h5>
+          <h5>{this.props.detail}</h5>
         </UnmountClosed>
       </li>
     );

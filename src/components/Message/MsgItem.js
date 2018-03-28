@@ -22,10 +22,10 @@ class MsgItem extends Component {
         <div>
           <div className="avator">
             <img src="/images/u1.jpg" />
-            <h4>Administrator</h4>
+            <h4>{this.props.name}</h4>
           </div>
-          <h4>Academic Report Submission</h4>
-          <h4>15 Sep, 8:56Am</h4>
+          <h4>{this.props.des}</h4>
+          <h4>{this.props.date}</h4>
           <a className="delete-icon">
             <i className="fas fa-trash-alt" />Delete
           </a>
@@ -34,13 +34,7 @@ class MsgItem extends Component {
           className="collapsible-content"
           isOpened={this.state.isopen}
         >
-          <h5>
-            Hi, This is Administrator from F2E, I'm here to inform you that you
-            need to submit your report. thank you! Hi, This is Administrator
-            from F2E, I'm here to inform you that you need to submit your
-            report. thank you! Hi, This is Administrator from F2E, I'm here to
-            inform you that you need to submit your report. thank you!
-          </h5>
+          <h5>{this.props.detail}</h5>
         </UnmountClosed>
       </li>
     );

@@ -10,10 +10,36 @@
 
 .home-header {
   display: flex;
-  margin: 0 auto;
+  margin-right: 40px;
   padding: 50px 0 0;
-  width: 80%;
   justify-content: flex-end;
+  align-items: center;
+}
+
+.home-vertical-line {
+  background-color: $off-white;
+  width: 4px;
+  border-radius: 2px;
+  height: 25px;
+  margin: 0 10px;
+}
+
+.home-language-text {
+  color: $off-white;
+  font-size: $font-size-large;
+  font-family: $font-subtitle;
+  font-weight: lighter;
+}
+
+.home-language-text:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.home-language-text-active {
+  font-weight: bold;
+  color: $off-white;
+  opacity: 1;
 }
 
 .login-btn {
@@ -39,21 +65,35 @@
 
 .home-board {
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
+  justify-content: flex-end;
   width: 45%;
   margin: auto auto 10% 10%;
   flex: 1;
+  text-align: justify;
   font-size: $font-size-large;
   font-family: $font-quote;
   font-style: italic;
   color: $off-white;
 }
 
+.home-board-author {
+  display: flex;
+  align-items: center;
+}
+
+.home-board-author > hr {
+  width: 100px;
+  height: 3px;
+  border-radius: 3px;
+}
+
 .apply-header {
   display: flex;
   flex-direction: column;
   margin: 5% auto 1%;
-  width: 60%;
+  width: 70%;
   text-align: center;
 }
 
@@ -64,10 +104,11 @@
 
 .apply-header > h4 {
   font-size: $font-size-large;
+  margin-top: 5px;
 }
 
 .apply-header > hr {
-  width: 80%;
+  width: 30%;
   height: 8px;
   margin: 0 auto;
   background-color: $dark-grey;
@@ -89,6 +130,7 @@
   grid-template-rows: 50% 10% 30% 10%;
   margin: 20px 20px;
   height: 500px;
+  width: 40%;
   font-size: $font-size-ssmall;
   box-shadow: 2px 2px 12px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -104,6 +146,11 @@
 }
 
 .apply-content > h2 {
+  font-family: $font-subtitle;
+  font-size: $font-size-medium;
+  line-height: $font-size-xlarge;
+  font-weight: 400;
+  text-transform: capitalize;
   padding: 0 20px;
 }
 
@@ -189,7 +236,8 @@
 
 .stundent-info-pic {
   border-radius: 50%;
-  transform: scale(1.2);
+  width: 160px;
+  height: 160px;
   border: 1px solid $light-grey;
   margin: 5px 15px;
   padding: 5px;

@@ -26,13 +26,7 @@ class LectureItem extends Component {
           className="collapsible-content"
           isOpened={this.state.isopen}
         >
-          <h5>
-            Hi, This is Administrator from F2E, I'm here to inform you that you
-            need to submit your report. thank you! Hi, This is Administrator
-            from F2E, I'm here to inform you that you need to submit your
-            report. thank you! Hi, This is Administrator from F2E, I'm here to
-            inform you that you need to submit your report. thank you!
-          </h5>
+          <h5>{this.props.content}</h5>
         </UnmountClosed>
       </li>
     );

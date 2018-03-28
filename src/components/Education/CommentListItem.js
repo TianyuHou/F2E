@@ -23,14 +23,11 @@ class CommentListItem extends Component {
           <div className="comment-header">
             <div className="comment-header-pic">
               <img src="/images/u2.jpg" />
-              <h5>Zhu Yin</h5>
+              <h5>{this.props.authorName}</h5>
             </div>
-            <h5>Post: Sep 05,2018 22:10 PM</h5>
+            <h5>{this.props.postDate}</h5>
           </div>
-          <div className="comment-content">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error,
-            explicabo quasi ratione odio dolorum harum.
-          </div>
+          <div className="comment-content">{this.props.content}</div>
           <div className="comment-operation">
             <a>
               Like<i className="far fa-thumbs-up" />

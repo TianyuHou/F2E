@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import Education from '../components/Education/Education';
 import Financial from '../components/Financial/Financial';
+import Landing from '../components/Landing';
 import Home from '../components/Home/Home';
 import Message from '../components/Message/Message';
 import Profile from '../components/Profile/Profile';
@@ -19,7 +20,8 @@ const AppRouter = () => (
   <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
     <div>
       <Switch>
-        <PublicRoute path="/" component={Home} exact={true} />
+        <PublicRoute path="/" component={Landing} exact={true} />
+        <PublicRoute path="/home" component={Home} />
         <PublicRoute path="/register" component={Register} />
         <PrivateRoute path="/education" component={Education} />
         <PrivateRoute path="/financial" component={Financial} />
