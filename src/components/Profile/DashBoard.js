@@ -14,7 +14,7 @@ class DashBoard extends Component {
 
   myDataSource = {
     chart: {
-      caption: 'Your Recently Activity',
+      caption: 'Your Recent Activity',
       subcaption: 'Last Year',
       xaxisname: 'Month',
       yaxisname: 'Times',

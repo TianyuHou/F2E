@@ -28,6 +28,14 @@ const AppRouter = () => (
         <PrivateRoute path="/message" component={Message} />
         <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/job" component={Jobboard} />
+        {/* <Route path="/" component={Landing} exact={true} />
+        <Route path="/home" component={Home} />
+        <Route path="/register" component={Register} />
+        <Route path="/education" component={Education} />
+        <Route path="/financial" component={Financial} />
+        <Route path="/message" component={Message} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/job" component={Jobboard} /> */}
         <Route component={NotFound} />
       </Switch>
     </div>

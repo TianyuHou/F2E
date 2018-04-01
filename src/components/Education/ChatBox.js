@@ -41,8 +41,10 @@ class ChatBox extends Component {
                   <h5>Zhu Yin</h5>
 
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Error, explicabo quasi ratione odio dolorum harum.
+                    Last week we talked about how to prepare for a job interview
+                    and this week we are going to practice a little bit. Besides
+                    that, we will still have half an hour left, maybe we can
+                    discuss your resume.
                   </p>
                 </div>
                 {/* <!-- end chat-message-content --> */}
@@ -60,9 +62,9 @@ class ChatBox extends Component {
                   <h5>Zhi Zunbao</h5>
 
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Blanditiis, nulla accusamus magni vel debitis numquam qui
-                    tempora rem voluptatem delectus!
+                    That will be great! Thank you so much! BTW, I have several
+                    questions about my web class assignment this week, can you
+                    give me some feedback about it?
                   </p>
                 </div>
                 {/* <!-- end chat-message-content --> */}
@@ -84,7 +86,7 @@ class ChatBox extends Component {
 
                   <h5>Zhu Yin</h5>
 
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+                  <p>No problem! Please send me your github link by email.</p>
                 </div>
                 {/* <!-- end chat-message-content --> */}
               </div>

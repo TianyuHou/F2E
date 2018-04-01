@@ -3,7 +3,7 @@ import React from 'react';
 const PersonalDoc = () => (
   <div className="table-container">
     <div className="table-title table-profile-title">
-      <h3>Personal Document</h3>
+      <h3>Personal Documents</h3>
       <button className="profile-btn">Update</button>
     </div>
     <ul className="table-content table-profile">

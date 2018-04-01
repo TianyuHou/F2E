@@ -5,7 +5,7 @@ const Registerform = () => (
   <form className="register-form">
     <div className="register-basic-title">
       <h3>Basic Information</h3>
-      <Link to="/" className="back-btn">
+      <Link to="/home" className="back-btn">
         <i className="fas fa-chevron-circle-left" />
         Back Home
       </Link>
@@ -24,7 +24,7 @@ const Registerform = () => (
         <input placeholder="Password" />
       </div>
       <div>
-        <label>Renter-Password: </label>
+        <label>Re-enter password: </label>
         <input placeholder="Renter-Password" />
       </div>
     </div>

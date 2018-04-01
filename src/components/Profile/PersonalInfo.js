@@ -11,10 +11,10 @@ const PersonalInfo = () => (
         <span>Name</span> <span>Allen yu</span>
       </li>
       <li>
-        <span>UserName</span> <span>Allen yu</span>
+        <span>Username</span> <span>Allen yu</span>
       </li>
       <li>
-        <span>Date Of Birth</span> <span>01-01-2018</span>
+        <span>Date of Birth</span> <span>01-01-2018</span>
       </li>
       <li>
         <span>Email</span> <span>Tianyu@gmail.com</span>
