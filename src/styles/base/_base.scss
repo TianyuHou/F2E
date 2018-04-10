@@ -111,6 +111,14 @@ p {
   color: $black;
 }
 
+.hide-window{
+  display: none;
+}
+
+.show-window{
+  display: block;
+}
+
 [class*='creditgroup'] {
   display: none;
 }

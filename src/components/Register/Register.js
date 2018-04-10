@@ -3,6 +3,13 @@ import Registerform from './Registerform';
 import Footer from '../Footer';
 
 class Register extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      identity: props.location.state.identity
+    };
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -10,7 +17,7 @@ class Register extends Component {
   render() {
     return (
       <div>
-        <Registerform />
+        <Registerform identity={this.state.identity} />
         <Footer />
       </div>
     );

@@ -29,12 +29,6 @@ const PersonalInfo = () => (
       <li>
         <span>School</span> <span>Northeastern University</span>
       </li>
-      <li>
-        <span>Attending Program</span> <span>Information Systems</span>
-      </li>
-      <li>
-        <span>Expected Graduation Date</span> <span>May 2019</span>
-      </li>
     </ul>
   </div>
 );

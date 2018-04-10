@@ -7,10 +7,14 @@ const Apply = ({ identity, content }) => {
       <div className={`apply-${identity}`} />
       <h1>Become a {identity}</h1>
       <h2>{content}</h2>
-      <Link to="/Register" className="apply-btn">
-        {/* <button className="apply-btn"> */}
+      <Link
+        to={{
+          pathname: '/Register',
+          state: { identity }
+        }}
+        className="apply-btn"
+      >
         Apply<i className="fas fa-chevron-circle-right" />
-        {/* </button> */}
       </Link>
     </div>
   );
