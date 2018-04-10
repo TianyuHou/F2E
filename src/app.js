@@ -6,7 +6,8 @@ import './styles/styles.scss';
 import configureStore from './store/configureStore';
 import AppRouter, { history } from './routers/AppRouter';
 import { login, logout } from './actions/auth';
-import { firebase } from './firebase/firebase';
+
+const firebase = require('./firebase/firebase').firebase;
 
 const store = configureStore();
 const jsx = (

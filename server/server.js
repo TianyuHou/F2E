@@ -1,5 +1,5 @@
-const firebase = require('../firebase/firebase').firebase;
-const database = require('../firebase/firebase').database;
+const firebase = require('../src/firebase/firebase').firebase;
+const database = require('../src/firebase/firebase').database;
 const path = require('path');
 const express = require('express');
 const app = express();
