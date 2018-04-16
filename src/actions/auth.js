@@ -1,6 +1,6 @@
 import config from "../config.json";
 const firebase = require("../firebase/firebase").firebase;
-// const f2e = config.f2e;
+const f2e = config.f2e;
 
 export const login = uid => ({
   type: "LOGIN",

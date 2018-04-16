@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { register, startLoginWithPwd } from "../../actions/auth";
 import ErrorMessage from "../ErrorMessage";
 import ProgressBar from "../ProgressBar";
+import { getWarn } from "../../selectors/utilities";
 const firebase = require("../../firebase/firebase").firebase;
 
 class Registerform extends Component {
@@ -103,6 +104,8 @@ class Registerform extends Component {
       this.warn = "Please Type a valid Zip Code";
     } else if (this.checkImg()) {
       this.warn = "Please upload your profile photo";
+    } else {
+      this.warn = "";
     }
   };
 
@@ -197,6 +200,7 @@ class Registerform extends Component {
     } else {
       const imgFile = e.target.files[0];
       let reader = new FileReader();
+      reader.readAsDataURL(imgFile);
 
       reader.onload = event => {
         this.setState({
@@ -204,8 +208,6 @@ class Registerform extends Component {
           imgFile: imgFile
         });
       };
-
-      reader.readAsDataURL(imgFile);
     }
   };
 
@@ -214,7 +216,7 @@ class Registerform extends Component {
     this.checkInput();
     if (this.warn.length === 0) {
       this.sendInfo();
-      this.hideWarn();
+      // this.hideWarn();
     } else {
       this.showWarn();
       window.scrollTo(0, 0);
@@ -241,27 +243,16 @@ class Registerform extends Component {
       imgName: this.state.imgFile.name
     };
     const res = await this.props.register(user, info);
-    switch (res) {
-      case "auth/email-already-in-use":
-        this.warn =
-          "There already exists an account with the given email address";
-        break;
-      case "auth/invalid-email":
-        this.warn = "the email address is not valid";
-        break;
-      case "auth/operation-not-allowed":
-        this.warn = "email/password accounts are not enabled";
-        break;
-      case "auth/weak-password":
-        this.warn = "the password is not strong enough";
-        break;
-      default:
-        this.hideWarn();
-        this.uploadAvatar(res, user);
-        return;
+    const warnmsg = getWarn(res);
+    if (warnmsg) {
+      this.warn = warnmsg;
+      this.showWarn();
+      window.scrollTo(0, 0);
+    } else {
+      this.hideWarn();
+      this.uploadAvatar(res, user);
+      return;
     }
-    this.showWarn();
-    window.scrollTo(0, 0);
   };
 
   uploadAvatar = (uid, user) => {

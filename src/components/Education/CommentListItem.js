@@ -21,12 +21,17 @@ class CommentListItem extends Component {
     });
   };
 
-  onDelete = () => {
-    this.props.startDeleteComment(
+  onDelete = async () => {
+    const warnmsg = await this.props.startDeleteComment(
       this.props.authorId,
       this.props.curLecture.id,
       this.props.id
     );
+    if (!warnmsg) {
+      this.props.hideWarn();
+    } else {
+      this.props.renderWarn(warnmsg);
+    }
   };
 
   render() {

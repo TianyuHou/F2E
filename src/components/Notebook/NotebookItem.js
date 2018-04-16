@@ -94,7 +94,7 @@ class NotebookItem extends Component {
     this.showIcon();
   };
 
-  onUpdate = () => {
+  onUpdate = async () => {
     if (this.checkEmpty()) {
       this.props.renderWarn("Please Fill All the Input!");
     } else {
@@ -105,20 +105,29 @@ class NotebookItem extends Component {
         des: this.state.des,
         time: `${date[1]} ${date[2]} ${date[3]} ${date[4]}`
       };
-      this.props.startEditNote(this.state.id, note);
-      this.setState({
-        isopen: false,
-        disabled: true
-      });
-      this.hideEditIcon();
-      this.hideIcon();
-      this.props.hideWarn();
+
+      const warnmsg = await this.props.startEditNote(this.state.id, note);
+      if (!warnmsg) {
+        this.setState({
+          isopen: false,
+          disabled: true
+        });
+        this.hideEditIcon();
+        this.hideIcon();
+        this.props.hideWarn();
+      } else {
+        this.props.renderWarn(warnmsg);
+      }
     }
   };
 
-  onDelete = () => {
-    this.props.startDeleteNote(this.state.id);
-    this.props.hideWarn();
+  onDelete = async () => {
+    const warnmsg = await this.props.startDeleteNote(this.state.id);
+    if (!warnmsg) {
+      this.props.hideWarn();
+    } else {
+      this.props.renderWarn(warnmsg);
+    }
   };
 
   onCancel = () => {

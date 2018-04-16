@@ -27,7 +27,7 @@ class NoteInput extends Component {
     });
   };
 
-  onSubmit = () => {
+  onSubmit = async () => {
     if (this.checkEmpty()) {
       this.props.renderWarn("Please Fill All the Input!");
     } else {
@@ -38,9 +38,13 @@ class NoteInput extends Component {
         des: this.state.des,
         time: `${date[1]} ${date[2]} ${date[3]} ${date[4]}`
       };
-      this.props.startAddNote(note);
-      this.reset();
-      this.props.hideWarn();
+      const warnmsg = await this.props.startAddNote(note);
+      if (!warnmsg) {
+        this.reset();
+        this.props.hideWarn();
+      } else {
+        this.props.renderWarn(warnmsg);
+      }
     }
   };
 

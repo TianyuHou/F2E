@@ -7,7 +7,10 @@ export default (state = [], action) => {
         if (n.id === action.id) {
           return {
             id: n.id,
-            lecture: action.lecture
+            lecture: {
+              ...n.lecture,
+              ...action.lecture
+            }
           };
         } else {
           return n;

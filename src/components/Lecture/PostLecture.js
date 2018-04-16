@@ -21,7 +21,7 @@ class PostLecture extends Component {
   };
 
   checkYoutube = () => {
-    return this.state.src.indexOf("https://www.youtube.com/watch?v=") === -1;
+    return this.state.src.indexOf("https://www.youtube.com/") === -1;
   };
 
   checkInput = () => {
@@ -55,7 +55,7 @@ class PostLecture extends Component {
     });
   };
 
-  onSubmit = () => {
+  onSubmit = async () => {
     if (this.checkInput()) {
       const date = new Date().toString().split(" ");
       date[4] = date[4].substring(0, 5);
@@ -66,8 +66,12 @@ class PostLecture extends Component {
         src: this.state.src.replace("watch?v=", "embed/"),
         time: `${date[1]} ${date[2]} ${date[3]} ${date[4]}`
       };
-      this.props.startAddLecture(lecture);
-      this.reset();
+      const warnmsg = await this.props.startAddLecture(lecture);
+      if (!warnmsg) {
+        this.reset();
+      } else {
+        this.props.renderWarn(warnmsg);
+      }
     }
   };
 

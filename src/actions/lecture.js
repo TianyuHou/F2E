@@ -1,5 +1,6 @@
 import config from "../config.json";
-// const f2e = config.f2e;
+import { getWarn } from "../selectors/utilities";
+const f2e = config.f2e;
 const firebase = require("../firebase/firebase").firebase;
 const database = require("../firebase/firebase").database;
 
@@ -25,7 +26,7 @@ export const deleteLecture = id => ({
 });
 
 const deleteData = (uid, id) => {
-  fetch(`/${uid}/${id}/deleteLecture`, {
+  return fetch(`/${uid}/${id}/deleteLecture`, {
     method: "DELETE"
   })
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
@@ -35,8 +36,12 @@ const deleteData = (uid, id) => {
 export const startDeleteLecture = id => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
-    await deleteData(uid, id);
-    dispatch(deleteLecture(id));
+    const res = await deleteData(uid, id);
+    const warn = getWarn(res);
+    if (!warn) {
+      dispatch(deleteLecture(id));
+    }
+    return warn;
   };
 };
 
@@ -59,7 +64,11 @@ export const startAddLecture = lecture => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
     const id = await postData(uid, lecture);
-    dispatch(addLecture({ id, lecture }));
+    const warn = getWarn(id);
+    if (!warn) {
+      dispatch(addLecture({ id, lecture }));
+    }
+    return warn;
   };
 };
 
@@ -80,12 +89,16 @@ const getData = () => {
 export const startGetLecture = () => {
   return async (dispatch, getState) => {
     const data = await getData();
-    dispatch(getLecture(data));
+    const warn = getWarn(data);
+    if (!warn) {
+      dispatch(getLecture(data));
+    }
+    return warn;
   };
 };
 
 const updateData = (uid, lecture, id) => {
-  fetch(`/${uid}/${id}/EditLecture`, {
+  return fetch(`/${uid}/${id}/EditLecture`, {
     method: "PUT",
     body: JSON.stringify({
       lecture
@@ -101,7 +114,11 @@ const updateData = (uid, lecture, id) => {
 export const startEditLecture = (id, lecture) => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
-    await updateData(uid, lecture, id);
-    dispatch(editLecture(id, lecture));
+    const res = await updateData(uid, lecture, id);
+    const warn = getWarn(res);
+    if (!warn) {
+      dispatch(editLecture(id, lecture));
+    }
+    return warn;
   };
 };

@@ -1,5 +1,6 @@
 import config from "../config.json";
-// const f2e = config.f2e;
+import { getWarn } from "../selectors/utilities";
+const f2e = config.f2e;
 const firebase = require("../firebase/firebase").firebase;
 const database = require("../firebase/firebase").database;
 
@@ -30,7 +31,7 @@ export const deleteTransaction = id => ({
 });
 
 const deleteData = (uid, id) => {
-  fetch(`/${uid}/${id}/deleteTransaction`, {
+  return fetch(`/${uid}/${id}/deleteTransaction`, {
     method: "DELETE"
   })
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
@@ -40,8 +41,12 @@ const deleteData = (uid, id) => {
 export const startDeleteTransaction = id => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
-    await deleteData(uid, id);
-    dispatch(deleteTransaction(id));
+    const res = await deleteData(uid, id);
+    const warn = getWarn(res);
+    if (!warn) {
+      dispatch(deleteTransaction(id));
+    }
+    return warn;
   };
 };
 
@@ -64,7 +69,11 @@ export const startAddTransaction = transaction => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
     const id = await postData(uid, transaction);
-    dispatch(addTransaction({ id, transaction }));
+    const warn = getWarn(id);
+    if (!warn) {
+      dispatch(addTransaction({ id, transaction }));
+    }
+    return warn;
   };
 };
 
@@ -85,7 +94,11 @@ const getData = () => {
 export const startGetAllTransaction = () => {
   return async (dispatch, getState) => {
     const data = await getData();
-    dispatch(getAllTransaction(data));
+    const warn = getWarn(data);
+    if (!warn) {
+      dispatch(getAllTransaction(data));
+    }
+    return warn;
   };
 };
 
@@ -93,12 +106,16 @@ export const startGetMyTransaction = () => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
     const data = await getMyData(uid);
-    dispatch(getMyTransaction(data));
+    const warn = getWarn(data);
+    if (!warn) {
+      dispatch(getMyTransaction(data));
+    }
+    return warn;
   };
 };
 
 const updateData = (uid, transaction, id) => {
-  fetch(`/${uid}/${id}/editTransaction`, {
+  return fetch(`/${uid}/${id}/editTransaction`, {
     method: "PUT",
     body: JSON.stringify({
       transaction
@@ -113,7 +130,11 @@ const updateData = (uid, transaction, id) => {
 
 export const startEditTransaction = (uid, id, transaction) => {
   return async (dispatch, getState) => {
-    await updateData(uid, transaction, id);
-    dispatch(editTransaction(id, transaction));
+    const res = await updateData(uid, transaction, id);
+    const warn = getWarn(res);
+    if (!warn) {
+      dispatch(editTransaction(id, transaction));
+    }
+    return warn;
   };
 };

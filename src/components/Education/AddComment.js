@@ -16,7 +16,7 @@ class AddComment extends Component {
     });
   };
 
-  submit = () => {
+  submit = async () => {
     const date = new Date().toString().split(" ");
     date[4] = date[4].substring(0, 5);
     const uid = this.props.lecture.lecture.uid;
@@ -28,8 +28,13 @@ class AddComment extends Component {
       url: this.props.url,
       time: `${date[1]} ${date[2]} ${date[3]} ${date[4]}`
     };
-    this.props.startAddComment(uid, id, comment);
-    this.reset();
+    const warnmsg = await this.props.startAddComment(uid, id, comment);
+    if (!warnmsg) {
+      this.props.hideWarn();
+      this.reset();
+    } else {
+      this.props.renderWarn(warnmsg);
+    }
   };
 
   reset = () => {

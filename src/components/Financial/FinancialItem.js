@@ -57,8 +57,13 @@ class FinancialItem extends Component {
     this.toggleShowPayIcon();
   };
 
-  onDelete = () => {
-    this.props.startDeleteTransaction(this.props.id);
+  onDelete = async () => {
+    const warnmsg = await this.props.startDeleteTransaction(this.props.id);
+    if (warnmsg) {
+      this.props.renderWarn(warnmsg);
+    } else {
+      this.props.hideWarn();
+    }
   };
 
   render() {

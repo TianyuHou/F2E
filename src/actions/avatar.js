@@ -1,5 +1,5 @@
 import config from "../config.json";
-// const f2e = config.f2e;
+const f2e = config.f2e;
 const firebase = require("../firebase/firebase").firebase;
 const database = require("../firebase/firebase").database;
 

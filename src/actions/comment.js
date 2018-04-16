@@ -1,5 +1,6 @@
 import config from "../config.json";
-// const f2e = config.f2e;
+import { getWarn } from "../selectors/utilities";
+const f2e = config.f2e;
 const firebase = require("../firebase/firebase").firebase;
 const database = require("../firebase/firebase").database;
 
@@ -19,7 +20,7 @@ export const deleteComment = id => ({
 });
 
 const deleteData = (uid, lectureId, id) => {
-  fetch(`/${uid}/${lectureId}/${id}/deleteComment`, {
+  return fetch(`/${uid}/${lectureId}/${id}/deleteComment`, {
     method: "DELETE"
   })
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
@@ -28,8 +29,12 @@ const deleteData = (uid, lectureId, id) => {
 
 export const startDeleteComment = (uid, lectureId, id) => {
   return async (dispatch, getState) => {
-    await deleteData(uid, lectureId, id);
-    dispatch(deleteComment(id));
+    const res = await deleteData(uid, lectureId, id);
+    const warn = getWarn(res);
+    if (!warn) {
+      dispatch(deleteComment(id));
+    }
+    return warn;
   };
 };
 
@@ -51,7 +56,11 @@ const postData = (uid, lectureId, comment) => {
 export const startAddComment = (uid, lectureId, comment) => {
   return async (dispatch, getState) => {
     const id = await postData(uid, lectureId, comment);
-    dispatch(addComment({ id, comment }));
+    const warn = getWarn(id);
+    if (!warn) {
+      dispatch(addComment({ id, comment }));
+    }
+    return warn;
   };
 };
 
@@ -65,6 +74,10 @@ const getData = (uid, lectureId) => {
 export const startGetComment = (uid, lectureId) => {
   return async (dispatch, getState) => {
     const data = await getData(uid, lectureId);
-    dispatch(getComment(data));
+    const warn = getWarn(data);
+    if (!warn) {
+      dispatch(getComment(data));
+    }
+    return warn;
   };
 };

@@ -6,6 +6,7 @@ import LectureList from "./LectureList";
 import CommentList from "./CommentList";
 import AddComment from "./AddComment";
 import MentorProfile from "./MentorProfile";
+import ErrorMessage from "../ErrorMessage";
 import { startGetLecture } from "../../actions/lecture";
 import { startGetCurLecture, getCurLecture } from "../../actions/curLecture";
 import { startGetMentor, getMentor } from "../../actions/mentor";
@@ -15,6 +16,10 @@ import { connect } from "react-redux";
 class Education extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      warn: "",
+      display: "none"
+    };
     const defaultLecture = {
       id: "zhe zhi ling li de zong se hu li tiao guo yi zhi lan duo de gou",
       lecture: {
@@ -45,11 +50,30 @@ class Education extends Component {
     }
   }
 
+  renderWarn = msg => {
+    this.setState({
+      warn: msg,
+      display: "block"
+    });
+    window.scrollTo(0, 0);
+  };
+
+  hideWarn = () => {
+    this.setState({
+      warn: "",
+      display: "none"
+    });
+  };
+
   render() {
     return (
       <div className="education-container">
         <Header />
         <div className="education">
+          <ErrorMessage
+            message={this.state.warn}
+            display={this.state.display}
+          />
           <div className="education-frame">
             <div className="education-content">
               <Video />
@@ -57,12 +81,22 @@ class Education extends Component {
                 <AddComment
                   disabled={true}
                   placeholder="Not Allowed to Add Comment To This Lecture"
+                  renderWarn={this.renderWarn}
+                  hideWarn={this.hideWarn}
                 />
               ) : (
-                <AddComment disabled={false} placeholder="Add Comment..." />
+                <AddComment
+                  disabled={false}
+                  placeholder="Add Comment..."
+                  renderWarn={this.renderWarn}
+                  hideWarn={this.hideWarn}
+                />
               )}
 
-              <CommentList />
+              <CommentList
+                renderWarn={this.renderWarn}
+                hideWarn={this.hideWarn}
+              />
             </div>
             <div className="education-list">
               <MentorProfile />

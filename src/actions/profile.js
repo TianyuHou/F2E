@@ -1,5 +1,6 @@
 import config from "../config.json";
-// const f2e = config.f2e;
+import { getWarn } from "../selectors/utilities";
+const f2e = config.f2e;
 const firebase = require("../firebase/firebase").firebase;
 const database = require("../firebase/firebase").database;
 
@@ -14,7 +15,7 @@ export const editProfile = info => ({
 });
 
 const putData = (info, uid) => {
-  fetch(`/${uid}/updateProfile`, {
+  return fetch(`/${uid}/updateProfile`, {
     method: "PUT",
     body: JSON.stringify({
       info
@@ -29,8 +30,12 @@ const putData = (info, uid) => {
 
 export const startEditProfile = (info, uid) => {
   return async dispatch => {
-    await putData(info, uid);
-    dispatch(editProfile({ info }));
+    const res = await putData(info, uid);
+    const warn = getWarn(res);
+    if (!warn) {
+      dispatch(editProfile({ info }));
+    }
+    return warn;
   };
 };
 
@@ -45,6 +50,10 @@ export const startGetProfile = () => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid;
     const data = await getData(uid);
-    dispatch(getProfile(data));
+    const warn = getWarn(data);
+    if (!warn) {
+      dispatch(getProfile(data));
+    }
+    return warn;
   };
 };

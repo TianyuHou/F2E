@@ -35,7 +35,7 @@ class MyLectureItem extends Component {
   };
 
   checkYoutube = () => {
-    return this.state.src.indexOf("https://www.youtube.com/watch?v=") === -1;
+    return this.state.src.indexOf("https://www.youtube.com/") === -1;
   };
 
   checkInput = () => {
@@ -121,7 +121,7 @@ class MyLectureItem extends Component {
     this.showIcon();
   };
 
-  onUpdate = () => {
+  onUpdate = async () => {
     if (this.checkInput()) {
       const date = new Date().toString().split(" ");
       date[4] = date[4].substring(0, 5);
@@ -131,19 +131,27 @@ class MyLectureItem extends Component {
         src: this.state.src.replace("watch?v=", "embed"),
         time: `${date[1]} ${date[2]} ${date[3]} ${date[4]}`
       };
-      this.props.startEditLecture(this.state.id, lecture);
-      this.setState({
-        isopen: false,
-        disabled: true
-      });
-      this.hideEditIcon();
-      this.hideIcon();
+      const warnmsg = await this.props.startEditLecture(this.state.id, lecture);
+      if (!warnmsg) {
+        this.setState({
+          isopen: false,
+          disabled: true
+        });
+        this.hideEditIcon();
+        this.hideIcon();
+      } else {
+        this.props.renderWarn(warnmsg);
+      }
     }
   };
 
-  onDelete = () => {
-    this.props.startDeleteLecture(this.state.id);
-    this.props.hideWarn();
+  onDelete = async () => {
+    const warnmsg = await this.props.startDeleteLecture(this.state.id);
+    if (!warnmsg) {
+      this.props.hideWarn();
+    } else {
+      this.props.renderWarn(warnmsg);
+    }
   };
 
   onCancel = () => {
@@ -233,7 +241,7 @@ class MyLectureItem extends Component {
         </div>
         <Collapse className="collapsible-content" isOpened={this.state.isopen}>
           <textarea
-            value={`${this.state.des} Link: ${this.state.src}`}
+            value={this.state.des}
             ref={e => (this.textarea = e)}
             onChange={this.onDesChange}
             disabled={this.state.disabled}

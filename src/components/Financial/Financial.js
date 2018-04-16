@@ -53,7 +53,10 @@ class Financial extends Component {
               <h3>Description</h3>
             </div>
             <ul>
-              <FinancialList />
+              <FinancialList
+                renderWarn={this.renderWarn}
+                hideWarn={this.hideWarn}
+              />
             </ul>
           </div>
         </div>

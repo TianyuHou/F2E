@@ -63,7 +63,7 @@ class PersonalInfo extends Component {
     );
   };
 
-  onUpdate = () => {
+  onUpdate = async () => {
     this.checkInput();
     if (this.warn.length === 0) {
       const info = {
@@ -81,11 +81,13 @@ class PersonalInfo extends Component {
         organization: this.state.organization
       };
 
-      this.props.startEditProfile(info, this.state.uid).then(() => {
-        console.log(this.state.disabled);
+      this.warn = await this.props.startEditProfile(info, this.state.uid);
+      if (!this.warn) {
         this.setState({ disabled: true });
-      });
-      this.props.hideWarn();
+        this.props.hideWarn();
+      } else {
+        this.props.showWarn(this.warn);
+      }
     } else {
       this.props.showWarn(this.warn);
     }

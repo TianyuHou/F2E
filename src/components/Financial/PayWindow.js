@@ -46,7 +46,7 @@ class PayWindow extends Component {
     });
   };
 
-  onSubmit = () => {
+  onSubmit = async () => {
     if (this.checkInput()) {
       this.renderWarn("Please Fill All Input!");
     } else {
@@ -61,12 +61,17 @@ class PayWindow extends Component {
         complete: true
       };
 
-      this.props
-        .startEditTransaction(this.props.requestUid, this.props.id, transaction)
-        .then(() => {
-          this.props.closeWindow();
-        });
-      this.hideWarn();
+      const warnmsg = await this.props.startEditTransaction(
+        this.props.requestUid,
+        this.props.id,
+        transaction
+      );
+      if (!warnmsg) {
+        this.props.closeWindow();
+        this.hideWarn();
+      } else {
+        this.renderWarn(warnmsg);
+      }
     }
   };
 

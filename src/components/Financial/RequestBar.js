@@ -28,7 +28,7 @@ class RequestBar extends Component {
     return this.state.requestAmount.length === 0 || this.state.des.length === 0;
   };
 
-  click = () => {
+  click = async () => {
     if (this.checkInput()) {
       const date = new Date().toString().split(" ");
       date[4] = date[4].substring(0, 5);
@@ -47,8 +47,13 @@ class RequestBar extends Component {
         complete: false
       };
 
-      this.props.startAddTransaction(transaction);
-      this.reset();
+      const warnmsg = await this.props.startAddTransaction(transaction);
+      if (!warnmsg) {
+        this.reset();
+        this.props.hideWarn();
+      } else {
+        this.props.renderWarn(warnmsg);
+      }
     }
   };
 

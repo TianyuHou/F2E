@@ -2,7 +2,7 @@ import React from "react";
 import CommentListItem from "./CommentListItem";
 import { connect } from "react-redux";
 
-const CommentList = ({ comments }) => (
+const CommentList = ({ comments, renderWarn, hideWarn }) => (
   <ul>
     {comments.map(comment => (
       <CommentListItem
@@ -13,6 +13,8 @@ const CommentList = ({ comments }) => (
         key={comment.id}
         id={comment.id}
         authorId={comment.comment.uid}
+        renderWarn={renderWarn}
+        hideWarn={hideWarn}
       />
     ))}
   </ul>

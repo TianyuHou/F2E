@@ -3,7 +3,7 @@ import FinancialItem from "./FinancialItem";
 import DonorFinancialItem from "./DonorFinancialItem";
 import { connect } from "react-redux";
 
-const FinancialList = ({ transactions, identity }) => {
+const FinancialList = ({ transactions, identity, renderWarn, hideWarn }) => {
   if (identity === "STUDENT") {
     return (
       <ul>
@@ -22,6 +22,8 @@ const FinancialList = ({ transactions, identity }) => {
               payName={n.transaction.payUser}
               payTime={n.transaction.payTime}
               complete={n.transaction.complete}
+              renderWarn={renderWarn}
+              hideWarn={hideWarn}
             />
           );
         })}
@@ -46,6 +48,8 @@ const FinancialList = ({ transactions, identity }) => {
               payName={n.transaction.payUser}
               payTime={n.transaction.payTime}
               complete={n.transaction.complete}
+              renderWarn={renderWarn}
+              hideWarn={hideWarn}
             />
           );
         })}

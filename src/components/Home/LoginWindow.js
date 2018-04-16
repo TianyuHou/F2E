@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { startLoginWithPwd } from "../../actions/auth";
+import { getWarn } from "../../selectors/utilities";
+import ErrorMessage from "../ErrorMessage";
 
 class LoginWindow extends Component {
   constructor(props) {
@@ -35,26 +37,9 @@ class LoginWindow extends Component {
         this.state.email,
         this.state.password
       );
-      switch (res) {
-        case "auth/invalid-email":
-          this.props.renderWarn("the email address is not valid!");
-          return;
-        case "auth/user-disabled":
-          this.props.renderWarn(
-            "the user corresponding to the given email has been disabled!"
-          );
-          return;
-        case "auth/user-not-found":
-          this.props.renderWarn(
-            "there is no user corresponding to the given email!"
-          );
-          return;
-        case "auth/wrong-password":
-          this.props.renderWarn("Wrong Password, Please check your Password!");
-          return;
-        default:
-          this.props.hideWarn();
-          return;
+      const warnmsg = getWarn(res);
+      if (warnmsg) {
+        this.props.renderWarn(warnmsg);
       }
     }
   };
@@ -62,6 +47,12 @@ class LoginWindow extends Component {
   render() {
     return (
       <div className={`login-window ${this.props.displaywin}`}>
+        <div className="error-login">
+          <ErrorMessage
+            message={this.props.warn}
+            display={this.props.display}
+          />
+        </div>
         <div className="window-content">
           <div className="window-header">
             <h1>Login</h1>

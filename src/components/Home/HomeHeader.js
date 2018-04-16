@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { startLogin } from "../../actions/auth";
 import LoginWindow from "./LoginWindow";
-import ErrorMessage from "../ErrorMessage";
 
 class HomeHeader extends Component {
   constructor(props) {
@@ -63,12 +62,7 @@ class HomeHeader extends Component {
         >
           Español
         </NavLink>
-        <div className="error-login">
-          <ErrorMessage
-            message={this.state.warn}
-            display={this.state.display}
-          />
-        </div>
+
         <LoginWindow
           renderWarn={this.renderWarn}
           hideWarn={this.hideWarn}
