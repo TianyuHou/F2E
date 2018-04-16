@@ -1,5 +1,5 @@
 import config from "../config.json";
-const f2e = config.f2e;
+// const f2e = config.f2e;
 const firebase = require("../firebase/firebase").firebase;
 const database = require("../firebase/firebase").database;
 
@@ -14,7 +14,7 @@ export const editProfile = info => ({
 });
 
 const putData = (info, uid) => {
-  fetch(`${f2e}/${uid}/updateProfile`, {
+  fetch(`/${uid}/updateProfile`, {
     method: "PUT",
     body: JSON.stringify({
       info
@@ -35,7 +35,7 @@ export const startEditProfile = (info, uid) => {
 };
 
 export const getData = uid => {
-  return fetch(`${f2e}/${uid}/getProfile`)
+  return fetch(`/${uid}/getProfile`)
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
     .then(data => data)
     .catch(() => Promise.reject("create-fail"));

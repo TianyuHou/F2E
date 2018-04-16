@@ -1,6 +1,6 @@
 import config from "../config.json";
 const firebase = require("../firebase/firebase").firebase;
-const f2e = config.f2e;
+// const f2e = config.f2e;
 
 export const login = uid => ({
   type: "LOGIN",
@@ -22,7 +22,7 @@ export const startLoginWithPwd = (email, password) => {
 
 export const register = (user, info) => {
   return () => {
-    return fetch(`${f2e}/startregister`, {
+    return fetch(`/startregister`, {
       method: "POST",
       body: JSON.stringify({
         user,

@@ -1,5 +1,5 @@
 import config from "../config.json";
-const f2e = config.f2e;
+// const f2e = config.f2e;
 const firebase = require("../firebase/firebase").firebase;
 const database = require("../firebase/firebase").database;
 
@@ -19,7 +19,7 @@ export const deleteComment = id => ({
 });
 
 const deleteData = (uid, lectureId, id) => {
-  fetch(`${f2e}/${uid}/${lectureId}/${id}/deleteComment`, {
+  fetch(`/${uid}/${lectureId}/${id}/deleteComment`, {
     method: "DELETE"
   })
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
@@ -34,7 +34,7 @@ export const startDeleteComment = (uid, lectureId, id) => {
 };
 
 const postData = (uid, lectureId, comment) => {
-  return fetch(`${f2e}/${uid}/${lectureId}/addComment`, {
+  return fetch(`/${uid}/${lectureId}/addComment`, {
     method: "POST",
     body: JSON.stringify({
       comment
@@ -56,7 +56,7 @@ export const startAddComment = (uid, lectureId, comment) => {
 };
 
 const getData = (uid, lectureId) => {
-  return fetch(`${f2e}/${uid}/${lectureId}/getAllComment`)
+  return fetch(`/${uid}/${lectureId}/getAllComment`)
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
     .then(data => data)
     .catch(() => Promise.reject("create-fail"));

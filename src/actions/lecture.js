@@ -1,5 +1,5 @@
 import config from "../config.json";
-const f2e = config.f2e;
+// const f2e = config.f2e;
 const firebase = require("../firebase/firebase").firebase;
 const database = require("../firebase/firebase").database;
 
@@ -25,7 +25,7 @@ export const deleteLecture = id => ({
 });
 
 const deleteData = (uid, id) => {
-  fetch(`${f2e}/${uid}/${id}/deleteLecture`, {
+  fetch(`/${uid}/${id}/deleteLecture`, {
     method: "DELETE"
   })
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
@@ -41,7 +41,7 @@ export const startDeleteLecture = id => {
 };
 
 const postData = (uid, lecture) => {
-  return fetch(`${f2e}/${uid}/addLecture`, {
+  return fetch(`/${uid}/addLecture`, {
     method: "POST",
     body: JSON.stringify({
       lecture
@@ -64,14 +64,14 @@ export const startAddLecture = lecture => {
 };
 
 const getMyData = uid => {
-  return fetch(`${f2e}/${uid}/getMyLecture`)
+  return fetch(`/${uid}/getMyLecture`)
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
     .then(data => data)
     .catch(() => Promise.reject("create-fail"));
 };
 
 const getData = () => {
-  return fetch(`${f2e}/getAllLecture`)
+  return fetch(`/getAllLecture`)
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
     .then(data => data)
     .catch(() => Promise.reject("create-fail"));
@@ -85,7 +85,7 @@ export const startGetLecture = () => {
 };
 
 const updateData = (uid, lecture, id) => {
-  fetch(`${f2e}/${uid}/${id}/EditLecture`, {
+  fetch(`/${uid}/${id}/EditLecture`, {
     method: "PUT",
     body: JSON.stringify({
       lecture

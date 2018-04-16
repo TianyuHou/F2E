@@ -1,5 +1,5 @@
 import config from "../config.json";
-const f2e = config.f2e;
+// const f2e = config.f2e;
 const firebase = require("../firebase/firebase").firebase;
 const database = require("../firebase/firebase").database;
 
@@ -30,7 +30,7 @@ export const deleteTransaction = id => ({
 });
 
 const deleteData = (uid, id) => {
-  fetch(`${f2e}/${uid}/${id}/deleteTransaction`, {
+  fetch(`/${uid}/${id}/deleteTransaction`, {
     method: "DELETE"
   })
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
@@ -46,7 +46,7 @@ export const startDeleteTransaction = id => {
 };
 
 const postData = (uid, transaction) => {
-  return fetch(`${f2e}/${uid}/addTransaction`, {
+  return fetch(`/${uid}/addTransaction`, {
     method: "POST",
     body: JSON.stringify({
       transaction
@@ -69,14 +69,14 @@ export const startAddTransaction = transaction => {
 };
 
 const getMyData = uid => {
-  return fetch(`${f2e}/${uid}/getMyTransaction`)
+  return fetch(`/${uid}/getMyTransaction`)
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
     .then(data => data)
     .catch(() => Promise.reject("create-fail"));
 };
 
 const getData = () => {
-  return fetch(`${f2e}/getAllTransactions`)
+  return fetch(`/getAllTransactions`)
     .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
     .then(data => data)
     .catch(() => Promise.reject("create-fail"));
@@ -98,7 +98,7 @@ export const startGetMyTransaction = () => {
 };
 
 const updateData = (uid, transaction, id) => {
-  fetch(`${f2e}/${uid}/${id}/editTransaction`, {
+  fetch(`/${uid}/${id}/editTransaction`, {
     method: "PUT",
     body: JSON.stringify({
       transaction
