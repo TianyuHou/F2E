@@ -1,5 +1,5 @@
 const firebase = require("firebase");
-const firebaseConfig = require("../../.firebaseConfig");
+// const firebaseConfig = require("../../.firebaseConfig");
 
 const config = {
   apiKey: process.env.FIREBASE_API_KEY || firebaseConfig.FIREBASE_API_KEY,
