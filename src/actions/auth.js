@@ -1,23 +1,44 @@
-import { firebase, googleAuthProvider } from '../firebase/firebase';
+import config from "../config.json";
+const firebase = require("../firebase/firebase").firebase;
+const f2e = config.f2e;
 
 export const login = uid => ({
-  type: 'LOGIN',
+  type: "LOGIN",
   uid
 });
 
-export const loginPwd = uid => ({
-  type: 'LOGIN-PWD',
-  uid
-});
-
-export const startLogin = () => {
+export const startLoginWithPwd = (email, password) => {
   return () => {
-    return firebase.auth().signInWithPopup(googleAuthProvider);
+    return firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(function(error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        return errorCode;
+      });
+  };
+};
+
+export const register = (user, info) => {
+  return () => {
+    return fetch(`${f2e}/startregister`, {
+      method: "POST",
+      body: JSON.stringify({
+        user,
+        info
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => (res.ok ? res.json() : Promise.reject(res.text())))
+      .catch(() => Promise.reject("create-fail"));
   };
 };
 
 export const logout = () => ({
-  type: 'LOGOUT'
+  type: "LOGOUT"
 });
 
 export const startLogout = () => {

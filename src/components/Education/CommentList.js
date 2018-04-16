@@ -1,24 +1,25 @@
-import React from 'react';
-import CommentListItem from './CommentListItem';
+import React from "react";
+import CommentListItem from "./CommentListItem";
+import { connect } from "react-redux";
 
-const CommentList = () => (
+const CommentList = ({ comments }) => (
   <ul>
-    <CommentListItem
-      authorName="Mentor"
-      postDate="Post: Sep 06,2017 11:16 AM"
-      content="That’s actually true. Great work﻿"
-    />
-    <CommentListItem
-      authorName="Allen Yu"
-      postDate="Post: Sep 05,2017 8:42 PM"
-      content="This girl is truly opening her heart! Truth is worth spreading, thank you"
-    />
-    <CommentListItem
-      authorName="Allen Yu"
-      postDate="Post: Sep 05,2017 2:10 PM"
-      content="Wow, I can relate to this talk so much!!! The core values and problems seems same everywhere. Anyway, It was wonderful!!! Thank you!!!"
-    />
+    {comments.map(comment => (
+      <CommentListItem
+        url={comment.comment.url}
+        authorName={comment.comment.name}
+        postDate={comment.comment.time}
+        content={comment.comment.content}
+        key={comment.id}
+        id={comment.id}
+        authorId={comment.comment.uid}
+      />
+    ))}
   </ul>
 );
 
-export default CommentList;
+const mapStateToProps = state => ({
+  comments: state.comment
+});
+
+export default connect(mapStateToProps)(CommentList);

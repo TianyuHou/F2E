@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import { UnmountClosed } from 'react-collapse';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { startDeleteComment } from "../../actions/comment";
+import autosize from "autosize";
 
 class CommentListItem extends Component {
   constructor(props) {
@@ -7,14 +9,25 @@ class CommentListItem extends Component {
     this.state = {
       isopen: false
     };
-    this.click = this.click.bind(this);
   }
 
-  click() {
+  componentDidMount() {
+    autosize(this.textarea);
+  }
+
+  click = () => {
     this.setState({
       isopen: !this.state.isopen
     });
-  }
+  };
+
+  onDelete = () => {
+    this.props.startDeleteComment(
+      this.props.authorId,
+      this.props.curLecture.id,
+      this.props.id
+    );
+  };
 
   render() {
     return (
@@ -22,37 +35,41 @@ class CommentListItem extends Component {
         <div className="comment-item">
           <div className="comment-header">
             <div className="comment-header-pic">
-              <img src="/images/u2.jpg" />
+              <img src={this.props.url} />
               <h5>{this.props.authorName}</h5>
             </div>
             <h5>{this.props.postDate}</h5>
           </div>
-          <div className="comment-content">{this.props.content}</div>
-          <div className="comment-operation">
-            <a>
-              Like<i className="far fa-thumbs-up" />
-            </a>
-            <a>
-              Copy<i className="far fa-copy" />
-            </a>
-            <a onClick={this.click}>
-              Reply<i className="fas fa-reply" />
-            </a>
+          <div className="comment-content">
+            <textarea
+              value={this.props.content}
+              ref={c => (this.textarea = c)}
+              disabled
+            />
+            {this.props.uid === this.props.authorId ? (
+              <div className="delete-icon">
+                <span onClick={this.onDelete}>
+                  <i className="fas fa-trash-alt" />Delete
+                </span>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
-        <UnmountClosed
-          className="collapsible-content"
-          isOpened={this.state.isopen}
-        >
-          <textarea
-            className="reply"
-            type="text"
-            placeholder="Reply to author..."
-          />
-        </UnmountClosed>
       </li>
     );
   }
 }
 
-export default CommentListItem;
+const mapStateToProps = state => ({
+  uid: state.auth.uid,
+  curLecture: state.curLecture
+});
+
+const mapDispatchToProps = dispatch => ({
+  startDeleteComment: (uid, lectureId, id) =>
+    dispatch(startDeleteComment(uid, lectureId, id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentListItem);

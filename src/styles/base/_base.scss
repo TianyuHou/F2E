@@ -52,7 +52,17 @@ button {
 }
 
 button:disabled {
-  cursor: default;
+  pointer-events: none;
+  background-color: $dark-grey;
+  box-shadow: none;
+}
+
+textarea {
+  border: 0;
+  background-color: transparent;
+  resize: none;
+  max-height: 150px;
+  min-height: 30px;
 }
 
 fieldset {
@@ -97,6 +107,14 @@ input {
   margin: 0;
 }
 
+input:disabled {
+  background: none;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px #fff inset;
+}
+
 p {
   margin: 0;
 }
@@ -111,14 +129,22 @@ p {
   color: $black;
 }
 
-.hide-window{
+.hide-window {
   display: none;
 }
 
-.show-window{
+.show-window {
   display: block;
 }
 
-[class*='creditgroup'] {
+.hide-icon {
   display: none;
+}
+
+.show-icon {
+  display: inline-block;
+}
+
+.ReactCollapse--content {
+  width: 100%;
 }

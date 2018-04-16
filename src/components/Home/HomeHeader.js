@@ -1,32 +1,48 @@
-import React,{Component} from 'react';
-import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { startLogin } from '../../actions/auth';
-import LoginWindow from './LoginWindow';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { startLogin } from "../../actions/auth";
+import LoginWindow from "./LoginWindow";
+import ErrorMessage from "../ErrorMessage";
 
-class HomeHeader extends Component{
-  constructor(props){
+class HomeHeader extends Component {
+  constructor(props) {
     super(props);
-    this.state={
-      display: 'hide-window'
-    }
-    this.onClick = this.onClick.bind(this);
-    this.closeWindow = this.closeWindow.bind(this);
+    this.state = {
+      displaywin: "hide-window",
+      warn: "",
+      display: "none"
+    };
   }
 
-  onClick(){
+  onClick = () => {
     this.setState({
-      display: 'show-window'
-    })
-  }
+      displaywin: "show-window"
+    });
+  };
 
-  closeWindow(){
+  renderWarn = msg => {
     this.setState({
-      display: 'hide-window'
-    })
-  }
+      warn: msg,
+      display: "block"
+    });
+  };
 
-  render(){
+  hideWarn = () => {
+    this.setState({
+      warn: "",
+      display: "none"
+    });
+  };
+
+  closeWindow = () => {
+    this.setState({
+      displaywin: "hide-window"
+    });
+    this.hideWarn();
+  };
+
+  render() {
     return (
       <div className="home-header">
         <button type="submit" onClick={this.onClick} className="login-btn">
@@ -47,10 +63,23 @@ class HomeHeader extends Component{
         >
           Español
         </NavLink>
-        <LoginWindow display={this.state.display} close={this.closeWindow}/>
+        <div className="error-login">
+          <ErrorMessage
+            message={this.state.warn}
+            display={this.state.display}
+          />
+        </div>
+        <LoginWindow
+          renderWarn={this.renderWarn}
+          hideWarn={this.hideWarn}
+          display={this.state.display}
+          warn={this.state.warn}
+          displaywin={this.state.displaywin}
+          close={this.closeWindow}
+        />
       </div>
-    )
+    );
   }
-};
+}
 
 export default HomeHeader;

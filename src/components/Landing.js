@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Landing = () => (
   <div className="landing">
@@ -10,7 +10,7 @@ const Landing = () => (
         <Link to="/home" className="landing-link">
           English
         </Link>
-        <Link to="/home" className="landing-link">
+        <Link to="/home2" className="landing-link">
           Español
         </Link>
       </div>

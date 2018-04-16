@@ -1,34 +1,93 @@
-import React from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
-import ChatBox from './ChatBox';
-import Lecture from './Lecture';
-import LectureList from './LectureList';
-import CommentList from './CommentList';
-import MentorProfile from './MentorProfile';
-import ProgressBar from '../ProgressBar';
-import AddComment from './AddComment';
+import React, { Component } from "react";
+import Header from "../Header";
+import Footer from "../Footer";
+import Video from "./Video";
+import LectureList from "./LectureList";
+import CommentList from "./CommentList";
+import AddComment from "./AddComment";
+import MentorProfile from "./MentorProfile";
+import { startGetLecture } from "../../actions/lecture";
+import { startGetCurLecture, getCurLecture } from "../../actions/curLecture";
+import { startGetMentor, getMentor } from "../../actions/mentor";
+import { startGetComment } from "../../actions/comment";
+import { connect } from "react-redux";
 
-const Education = () => (
-  <div className="education-container">
-    <Header />
-    <div className="education">
-      <ProgressBar name="Education" />
-      <div className="education-frame">
-        <div className="education-content">
-          <Lecture videoSrc="https://www.youtube.com/embed/tgbNymZ7vqY" />
-          <AddComment />
-          <CommentList />
+class Education extends Component {
+  constructor(props) {
+    super(props);
+    const defaultLecture = {
+      id: "zhe zhi ling li de zong se hu li tiao guo yi zhi lan duo de gou",
+      lecture: {
+        src: "https://www.youtube.com/embed/13z-ddwp6wo",
+        title: "No Title Avaliable",
+        des: "No Description Avaliable",
+        time: "No Time Avaliable"
+      }
+    };
+    const defaultMentor = {
+      info: {
+        firstName: "No",
+        lastName: " Name Avaliable",
+        organization: "No Org Avaliable",
+        email: "No Email Avaliable",
+        url: "/images/profile-default.png"
+      }
+    };
+    if (this.props.lecture.length === 0) {
+      this.props.getMentor(defaultMentor);
+      this.props.getCurLecture(defaultLecture);
+    } else {
+      const id = this.props.lecture[0].id;
+      const uid = this.props.lecture[0].lecture.uid;
+      this.props.startGetMentor(uid);
+      this.props.startGetCurLecture(id);
+      this.props.startGetComment(uid, id);
+    }
+  }
+
+  render() {
+    return (
+      <div className="education-container">
+        <Header />
+        <div className="education">
+          <div className="education-frame">
+            <div className="education-content">
+              <Video />
+              {this.props.lecture.length === 0 ? (
+                <AddComment
+                  disabled={true}
+                  placeholder="Not Allowed to Add Comment To This Lecture"
+                />
+              ) : (
+                <AddComment disabled={false} placeholder="Add Comment..." />
+              )}
+
+              <CommentList />
+            </div>
+            <div className="education-list">
+              <MentorProfile />
+              <LectureList list={this.props.lecture} />
+            </div>
+          </div>
         </div>
-        <div className="education-list">
-          <MentorProfile />
-          <LectureList />
-        </div>
+        <Footer />
       </div>
-    </div>
-    <Footer />
-    <ChatBox />
-  </div>
-);
+    );
+  }
+}
 
-export default Education;
+const mapStateToProps = state => ({
+  lecture: state.lecture,
+  curLecture: state.curLecture
+});
+
+const mapDispatchToProps = dispatch => ({
+  startGetLecture: async () => dispatch(startGetLecture()),
+  startGetCurLecture: id => dispatch(startGetCurLecture(id)),
+  getCurLecture: lecture => dispatch(getCurLecture(lecture)),
+  startGetMentor: uid => dispatch(startGetMentor(uid)),
+  getMentor: mentor => dispatch(getMentor(mentor)),
+  startGetComment: (uid, lectureId) => dispatch(startGetComment(uid, lectureId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Education);

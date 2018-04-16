@@ -1,14 +1,29 @@
-import React from 'react';
+import React from "react";
+import { connect } from "react-redux";
 
-const MentorProfile = () => (
+const MentorProfile = ({
+  mentor = {
+    info: {
+      firstName: "No",
+      lastName: " Name Avaliable",
+      organization: "No Org Avaliable",
+      email: "No Email Avaliable",
+      url: "/images/profile-default.png"
+    }
+  }
+}) => (
   <div className="mentor-profile">
     <div className="mentor-intro">
-      <p>Zhu Yin</p>
-      <p>IT Architect in Costco</p>
-      <p>zhuyin93@gmail.com</p>
+      <p>{`${mentor.firstName} ${mentor.lastName}`}</p>
+      <p>{mentor.organization}</p>
+      <p>{mentor.email}</p>
     </div>
-    <img src="/images/u2.jpg" />
+    <img src={mentor.url} />
   </div>
 );
 
-export default MentorProfile;
+const mapStateToProps = state => ({
+  mentor: state.mentor.info
+});
+
+export default connect(mapStateToProps)(MentorProfile);

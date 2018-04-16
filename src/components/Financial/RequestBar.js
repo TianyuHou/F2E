@@ -1,34 +1,94 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { startAddTransaction } from "../../actions/transaction";
+import { connect } from "react-redux";
 
 class RequestBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isopen: false
+      requestAmount: "",
+      des: ""
     };
-    this.click = this.click.bind(this);
   }
 
-  click() {
+  checkInput = () => {
+    if (this.checkEmpty()) {
+      this.props.renderWarn("Please Fill All Input Please!");
+      return false;
+    } else if (Number(this.state.requestAmount) <= 0) {
+      this.props.renderWarn("Please Type A valid Request Amount");
+      return false;
+    } else {
+      this.props.hideWarn();
+      return true;
+    }
+  };
+
+  checkEmpty = () => {
+    return this.state.requestAmount.length === 0 || this.state.des.length === 0;
+  };
+
+  click = () => {
+    if (this.checkInput()) {
+      const date = new Date().toString().split(" ");
+      date[4] = date[4].substring(0, 5);
+      const transaction = {
+        requestTime: `${date[1]} ${date[2]} ${date[3]} ${date[4]}`,
+        requestUser: this.props.name,
+        requestUid: this.props.uid,
+        requestAvatar: this.props.avatar,
+        requestAmount: `$${this.state.requestAmount}`,
+        des: this.state.des,
+        payAmount: 0,
+        payUser: "",
+        payUid: "",
+        payTime: "",
+        payAvatar: "",
+        complete: false
+      };
+
+      this.props.startAddTransaction(transaction);
+      this.reset();
+    }
+  };
+
+  reset = () => {
     this.setState({
-      isopen: !this.state.isopen
+      requestAmount: "",
+      des: ""
     });
-  }
+  };
+
+  onAmountChange = e => {
+    this.setState({
+      requestAmount: e.target.value
+    });
+  };
+
+  onDesChange = e => {
+    this.setState({
+      des: e.target.value
+    });
+  };
 
   render() {
     return (
       <div className="request-form">
-        <div>
-          <label>Amount: </label>
-          <input type="Number" placeholder="Amount..." />
+        <div className="request-form-title">
+          <input
+            type="Number"
+            placeholder="Amount..."
+            value={this.state.requestAmount}
+            onChange={this.onAmountChange}
+          />
         </div>
-        <div>
-          <label>Date:</label>
-          <input type="date" />
-        </div>
-        <div>
-          <label>Description: </label>
-          <input type="text" placeholder="Description..." />
+        <div className="request-form-des">
+          <input
+            type="text"
+            placeholder="Description..."
+            value={this.state.des}
+            onChange={this.onDesChange}
+          />
         </div>
         <button className="request-money-btn" onClick={this.click}>
           Request Money
@@ -38,4 +98,14 @@ class RequestBar extends Component {
   }
 }
 
-export default RequestBar;
+const mapStateToProps = state => ({
+  name: `${state.profile.info.firstName} ${state.profile.info.lastName}`,
+  uid: state.auth.uid,
+  avatar: state.avatar.url
+});
+
+const mapDispatchToProps = dispatch => ({
+  startAddTransaction: transaction => dispatch(startAddTransaction(transaction))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RequestBar);

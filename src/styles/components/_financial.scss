@@ -17,30 +17,16 @@
 .table-title-financial {
   display: grid;
   text-align: center;
-  grid-template-columns: 20% 20% 40% 20%;
+  align-items: center;
+  grid-template-columns: 20% 15% 15% 10% 15% auto;
 }
 
-.searchbar {
-  display: flex;
-  width: 60%;
-  margin: 20px auto 20px;
-  flex: 1;
-}
-
-.searchbar > input {
-  flex: 1;
-  border: 0;
-  padding: 4px 0;
-  border-radius: 30px;
-  border: 1px solid $dark-blue;
-  background-color: transparent;
-  box-shadow: 2px 2px 8px;
-  transition: all 0.2s ease-in-out;
-}
-
-.searchbar > input:focus,
-.searchbar > input:active {
-  box-shadow: none;
+.table-donor-financial {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 40% 30% auto;
+  grid-gap: 10px;
+  align-items: center;
 }
 
 .search-btn {
@@ -63,10 +49,24 @@
 .request-form {
   margin: 20px auto;
   display: grid;
-  grid-template-columns: 30% 30% 30% 10%;
-  align-items: center;
+  grid-template-columns: 30% 50% auto;
+  grid-gap: 20px;
   font-family: $font-subtitle;
   font-size: $font-size-large;
+}
+
+.request-form-des > input {
+  border: 2px solid $dark-grey;
+  border-radius: 10px;
+  font-size: $font-size-xlarge;
+  width: 100%;
+}
+
+.request-form-title > input {
+  border: 2px solid $dark-grey;
+  border-radius: 10px;
+  font-size: $font-size-xlarge;
+  width: 100%;
 }
 
 .request-form input {
@@ -75,7 +75,7 @@
 
 .request-money-btn {
   @extend .search-btn;
-  width: 100px;
+  width: 100%;
   margin: 0;
   border-radius: 20px;
   background-color: $dark-blue;
@@ -86,4 +86,39 @@
   cursor: pointer;
   background-color: $red;
   box-shadow: 1px 1px 5px $black;
+}
+
+.request-money-des {
+  color: $green;
+}
+
+.paid-money-des {
+  color: $red;
+}
+
+.pay-btn {
+  width: 40%;
+  margin: 0 auto;
+  border: 1px solid $dark-blue;
+  border-radius: 10px;
+}
+
+.pay-btn:hover {
+  background-color: $dark-blue;
+  color: $off-white;
+  cursor: pointer;
+}
+
+.student-paid-operation {
+  display: flex;
+  justify-content: center;
+}
+
+.student-paid-operation span {
+  margin-right: 10px;
+}
+
+.financial-des {
+  width: 100%;
+  font-family: $font-subtitle;
 }

@@ -1,17 +1,24 @@
 .profile {
-  display: flex;
+  display: grid;
+  grid-template-columns: 20% auto;
+  grid-gap: 20px;
   width: 80%;
   margin: 30px auto;
-  justify-content: space-around;
 }
 
 .profile-pic {
-  flex-basis: 20%;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile-content {
   margin-left: 6%;
   flex-basis: 80%;
+}
+
+.profile-error {
+  width: 80%;
+  margin: 0 auto;
 }
 
 .profile-content-dashboard {
@@ -32,16 +39,32 @@
   margin-top: 10px;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
 }
 
 .edit-icon > a:hover {
   cursor: pointer;
 }
 
-.profile-progressbar {
-  width: 80%;
-  margin: 20px auto 20px;
+.upload-profile-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: flex-end;
+}
+
+.upload-files {
+  font-family: $font-btn;
+  font-size: $font-size-large;
+  color: $dark-blue;
+  border-radius: 20px;
+  padding: 0 5px;
+  border: 2px solid $dark-blue;
+}
+
+.upload-files:hover {
+  cursor: pointer;
+  background-color: $dark-blue;
+  color: $off-white;
 }
 
 .table-profile-title {
@@ -59,6 +82,11 @@
   font-size: $font-size-large;
 }
 
+.table-profile span {
+  font-family: $font-subtitle;
+  font-weight: bold;
+}
+
 .profile-btn {
   margin: 0 0 0 auto;
   font-family: $font-btn;
@@ -71,4 +99,27 @@
   cursor: pointer;
   background-color: $off-white;
   color: $black;
+}
+
+.profile-edit-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-edit-btn > span {
+  margin-right: 10px;
+}
+
+.profile-edit-btn > span:hover {
+  cursor: pointer;
+  color: $red;
+}
+
+.profile-check-icon > span {
+  margin-left: 5px;
+}
+
+.profile-check-icon > span:hover {
+  cursor: pointer;
+  color: $red;
 }

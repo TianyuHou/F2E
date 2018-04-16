@@ -25,9 +25,20 @@
 }
 
 .table-content > *:hover {
-  cursor: pointer;
   transform: scale(1.01);
   box-shadow: 5px 5px 5px;
+}
+
+.avator {
+  display: flex;
+  align-items: center;
+}
+
+.avator > img {
+  border-radius: 50%;
+  width: 20%;
+  height: 20%;
+  margin-right: 10px;
 }
 
 .collapsible-content {
