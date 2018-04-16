@@ -2,7 +2,7 @@ const { checkUser } = require("./checkData");
 const { checkInfo } = require("./checkData");
 const { checkNote } = require("./checkData");
 const { checkLecture } = require("./checkData");
-const { checkUpLecture } = require("./checkData");
+const { checkUpdateLecture } = require("./checkData");
 const { checkTransaction } = require("./checkData");
 const { checkUpdateTransaction } = require("./checkData");
 
@@ -367,11 +367,12 @@ app.delete("/:uid/:lectureId/:commentId/deleteComment", (req, res) => {
       database
         .ref(`lectures/${uid}/${lectureId}/comment/${id}`)
         .remove()
-        .then(() => res.json(""))
+        .then(() => {
+          res.json("");
+        })
         .catch(err => {
           res.json("auth/database-error");
         });
-      res.status(200);
     } else {
       res.json("auth/no-id");
     }

@@ -2,7 +2,7 @@ import React from "react";
 import CommentListItem from "./CommentListItem";
 import { connect } from "react-redux";
 
-const CommentList = ({ comments, renderWarn, hideWarn }) => (
+const CommentList = ({ comments, renderWarn, hideWarn, curLecture }) => (
   <ul>
     {comments.map(comment => (
       <CommentListItem
@@ -21,7 +21,8 @@ const CommentList = ({ comments, renderWarn, hideWarn }) => (
 );
 
 const mapStateToProps = state => ({
-  comments: state.comment
+  comments: state.comment,
+  curLecture: state.curLecture
 });
 
 export default connect(mapStateToProps)(CommentList);

@@ -23,7 +23,7 @@ class CommentListItem extends Component {
 
   onDelete = async () => {
     const warnmsg = await this.props.startDeleteComment(
-      this.props.authorId,
+      this.props.curLecture.lecture.uid,
       this.props.curLecture.id,
       this.props.id
     );
