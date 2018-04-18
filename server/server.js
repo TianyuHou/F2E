@@ -68,14 +68,12 @@ app.put("/:uid/updateProfile", (req, res) => {
         })
         .then(() => res.json(""))
         .catch(err => {
-          console.log(err);
           res.json("auth/database-error");
         });
     } else {
       res.json(msg);
     }
   } else {
-    console.log("noid");
     res.json("auth/no-uid");
   }
 });

@@ -44,7 +44,6 @@ class Profile extends Component {
   };
 
   onChange = e => {
-    console.log(e.target.files.length);
     if (e.target.files.length === 0) {
       this.setState({
         url: "/images/profile-default.png"
